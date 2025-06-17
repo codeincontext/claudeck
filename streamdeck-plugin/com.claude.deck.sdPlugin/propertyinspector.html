@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Claude Deck Property Inspector</title>
+    <link rel="stylesheet" href="css/sdpi.css">
+</head>
+<body>
+    <div class="sdpi-wrapper">
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Command</div>
+            <input class="sdpi-item-value" type="text" id="command" placeholder="Enter Claude command">
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Predefined Commands</div>
+            <select class="sdpi-item-value" id="presetCommands">
+                <option value="">Select a command...</option>
+                <option value="help">Help</option>
+                <option value="/plan">Enter Planning Mode</option>
+                <option value="/auto">Toggle Auto-accept</option>
+                <option value="/reset">Reset Conversation</option>
+                <option value="/exit">Exit Claude</option>
+                <option value="y">Yes</option>
+                <option value="n">No</option>
+                <option value="q">Quit/Cancel</option>
+            </select>
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Claude State</div>
+            <div class="sdpi-item-value" id="claudeState">Checking...</div>
+        </div>
+    </div>
+
+    <script>
+        let websocket = null;
+        let uuid = null;
+        let actionInfo = null;
+
+        function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, inActionInfo) {
+            uuid = inUUID;
+            actionInfo = JSON.parse(inActionInfo);
+            
+            websocket = new WebSocket('ws://localhost:' + inPort);
+            
+            websocket.onopen = function() {
+                const json = {
+                    event: inRegisterEvent,
+                    uuid: inUUID
+                };
+                websocket.send(JSON.stringify(json));
+                
+                // Load current settings
+                loadSettings();
+                updateClaudeState();
+            };
+        }
+
+        function loadSettings() {
+            const settings = actionInfo.payload.settings;
+            if (settings) {
+                document.getElementById('command').value = settings.command || '';
+            }
+        }
+
+        function saveSettings() {
+            const command = document.getElementById('command').value;
+            
+            const json = {
+                event: 'setSettings',
+                context: uuid,
+                payload: {
+                    command: command
+                }
+            };
+            websocket.send(JSON.stringify(json));
+        }
+
+        async function updateClaudeState() {
+            try {
+                const response = await fetch('http://localhost:8080/state');
+                const state = await response.json();
+                
+                const stateElement = document.getElementById('claudeState');
+                stateElement.textContent = `Mode: ${state.mode}, Prompt: ${state.prompt}`;
+            } catch (error) {
+                document.getElementById('claudeState').textContent = 'Wrapper not running';
+            }
+        }
+
+        // Event listeners
+        document.getElementById('command').addEventListener('input', saveSettings);
+        
+        document.getElementById('presetCommands').addEventListener('change', function() {
+            const selected = this.value;
+            if (selected) {
+                document.getElementById('command').value = selected;
+                saveSettings();
+            }
+        });
+
+        // Update state every 3 seconds
+        setInterval(updateClaudeState, 3000);
+    </script>
+</body>
+</html>

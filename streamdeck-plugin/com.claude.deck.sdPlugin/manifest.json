@@ -1,0 +1,38 @@
+{
+  "Actions": [
+    {
+      "Icon": "Images/action",
+      "Name": "Claude Command",
+      "States": [
+        {
+          "Image": "Images/action",
+          "TitleAlignment": "middle",
+          "FontSize": "12"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "Tooltip": "Send command to Claude Code",
+      "UUID": "com.claude.deck.command"
+    }
+  ],
+  "Author": "Claude Deck",
+  "CodePath": "plugin.js",
+  "Description": "Control Claude Code with Stream Deck",
+  "Name": "Claude Deck",
+  "Icon": "Images/plugin",
+  "URL": "https://github.com/anthropics/claude-code",
+  "Version": "1.0.0",
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.14"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Software": {
+    "MinimumVersion": "4.0"
+  }
+}
