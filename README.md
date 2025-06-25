@@ -106,43 +106,6 @@
 
 3. **Configure commands** in the Property Inspector for the Command action
 
-## 🏗️ Architecture
-
-```mermaid
-graph LR
-    A[Stream Deck] --> B[TypeScript Plugin]
-    B --> C[HTTP API :18080]
-    C --> D[Python PTY Wrapper]
-    D --> E[Claude Code]
-    
-    E --> F[Terminal Output]
-    F --> G[State Detection]
-    G --> H[Dynamic Button Updates]
-    H --> A
-```
-
-### Communication Flow
-1. **Stream Deck Plugin** sends HTTP requests to localhost:18080
-2. **Python Wrapper** receives commands and forwards to Claude Code via PTY
-3. **Claude Code** runs in pseudo-terminal with proper TTY handling
-4. **State Monitoring** tracks Claude's mode for dynamic button updates
-
-## 📁 Project Structure
-
-```
-claudeck/
-├── wrapper/              # Python PTY wrapper
-│   ├── claude_deck_wrapper.py
-│   └── __init__.py
-├── claudeck-plugin/      # Stream Deck plugin (TypeScript)
-│   └── context/
-│       ├── src/          # TypeScript source
-│       └── de.co.context.claudedeck.sdPlugin/
-├── tests/                # Test scripts
-├── prompts/              # Prompt files and documentation
-└── pyproject.toml        # Python package configuration
-```
-
 ## 🎮 Stream Deck Actions
 
 ### Command Examples
