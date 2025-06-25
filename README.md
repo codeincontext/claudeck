@@ -24,11 +24,14 @@
 
 ## 🤔 Why Claudeck?
 
-**The Problem**: Constantly switching between your IDE, terminal, and Claude Code breaks your flow. You're either:
-- Alt-tabbing between windows to send commands
-- Only have one arm free (holding a baby, playing guitar)
-- Working hands-free with voice coding
-- Missing important state changes in Claude's interface
+**The Problem**: The typical workflow kills your flow:
+1. Ask Claude to do something (typing or voice)
+2. Switch to other work while Claude thinks
+3. Claude asks permission to proceed 
+4. Alt-tab back to approve, then back to your work
+5. Repeat endlessly
+
+Even worse when coding with voice - you're hands-free until Claude needs approval.
 
 **The Solution**: Dedicated hardware buttons that work regardless of what's on your screen.
 
