@@ -2,7 +2,7 @@
 
 **Physical buttons for Claude Code. Control Claude instantly from your Stream Deck - no keyboard, no switching windows. See Claude's state at a glance.**
 
-![Claudeck in Action](hero-image.jpg)
+<img src="hero-image.jpg" alt="Claudeck in Action" width="600">
 
 ![Claude + Stream Deck](https://img.shields.io/badge/Claude-Stream%20Deck-blue?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.9+-green?style=flat-square)
