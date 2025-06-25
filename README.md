@@ -1,6 +1,6 @@
 # 🎛️ Claudeck
 
-**Physical buttons for Claude Code. Bypass the keyboard - buttons wired straight to the terminal.**
+**Physical buttons for Claude Code. Control Claude instantly from your Stream Deck - no keyboard, no switching windows, just press and go.**
 
 ![Claudeck in Action](hero-image.jpg)
 
