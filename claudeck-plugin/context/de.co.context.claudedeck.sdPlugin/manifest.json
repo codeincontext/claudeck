@@ -1,0 +1,192 @@
+{
+	"Name": "Claude Deck",
+	"Version": "2.0.0",
+	"Author": "Claude Deck Team",
+	"Actions": [
+		{
+			"Name": "Claude Command",
+			"UUID": "de.co.context.claudedeck.command",
+			"Icon": "imgs/actions/command/action",
+			"Tooltip": "Send a custom command to Claude Code",
+			"PropertyInspectorPath": "ui/command-pi.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": true,
+			"States": [
+				{
+					"Image": "imgs/actions/command/action",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#ffffff",
+					"Title": "Command"
+				}
+			]
+		},
+		{
+			"Name": "OK (Return)",
+			"UUID": "de.co.context.claudedeck.ok",
+			"Icon": "imgs/actions/ok/icon",
+			"Tooltip": "Send Return key to Claude Code",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": true,
+			"States": [
+				{
+					"Image": "imgs/actions/ok/icon",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#ffffff",
+					"Title": "OK"
+				},
+				{
+					"Image": "imgs/actions/ok/thinking/icon",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#f59e0b",
+					"Title": "Wait"
+				},
+				{
+					"Image": "imgs/actions/ok/offline/icon",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#666666",
+					"Title": "Offline"
+				}
+			]
+		},
+		{
+			"Name": "Escape",
+			"UUID": "de.co.context.claudedeck.escape",
+			"Icon": "imgs/actions/escape/icon",
+			"Tooltip": "Send Escape key to Claude Code",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": true,
+			"States": [
+				{
+					"Image": "imgs/actions/escape/icon",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#ffffff",
+					"Title": "ESC"
+				},
+				{
+					"Image": "imgs/actions/escape/offline/icon",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#666666",
+					"Title": "Offline"
+				}
+			]
+		},
+		{
+			"Name": "Shift+Tab",
+			"UUID": "de.co.context.claudedeck.shifttab",
+			"Icon": "imgs/actions/shift-tab/icon",
+			"Tooltip": "Send Shift+Tab to Claude Code",
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": true,
+			"States": [
+				{
+					"Image": "imgs/actions/shift-tab/icon",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#ffffff",
+					"Title": "Shift+Tab"
+				},
+				{
+					"Image": "imgs/actions/shift-tab/plan/icon",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#ffffff",
+					"Title": "Plan"
+				},
+				{
+					"Image": "imgs/actions/shift-tab/auto-accept/icon",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#ffffff",
+					"Title": "Auto"
+				},
+				{
+					"Image": "imgs/actions/shift-tab/offline/icon",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#666666",
+					"Title": "Offline"
+				}
+			]
+		},
+		{
+			"Name": "Model",
+			"UUID": "de.co.context.claudedeck.model",
+			"Icon": "imgs/actions/model/unknown/action",
+			"Tooltip": "Toggle Claude model (Sonnet/Opus)",
+			"PropertyInspectorPath": "ui/model-pi.html",
+			"DisableAutomaticStates": true,
+			"Controllers": [
+				"Keypad"
+			],
+			"SupportedInMultiActions": true,
+			"States": [
+				{
+					"Image": "imgs/actions/model/unknown/action",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#ffffff",
+					"Title": "Model?"
+				},
+				{
+					"Image": "imgs/actions/model/sonnet/action",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#ffffff",
+					"Title": "Sonnet"
+				},
+				{
+					"Image": "imgs/actions/model/opus/action",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#ffffff",
+					"Title": "Opus"
+				},
+				{
+					"Image": "imgs/actions/model/offline/action",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "#666666",
+					"Title": "Offline"
+				}
+			]
+		}
+	],
+	"Category": "Claude Deck",
+	"CategoryIcon": "imgs/plugin/category-icon",
+	"CodePath": "bin/plugin.js",
+	"Description": "Control Claude Code from your Stream Deck",
+	"Icon": "imgs/plugin/marketplace",
+	"SDKVersion": 2,
+	"Software": {
+		"MinimumVersion": "6.4"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "10.15"
+		},
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Nodejs": {
+		"Version": "20",
+		"Debug": "enabled"
+	},
+	"UUID": "de.co.context.claudedeck"
+}

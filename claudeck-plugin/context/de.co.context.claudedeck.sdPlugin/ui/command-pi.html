@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Claude Command Settings</title>
+    <meta charset="utf-8" />
+    <script src="https://sdpi-components.dev/releases/v4/sdpi-components.js"></script>
+</head>
+<body>
+    <!-- Command Input -->
+    <sdpi-item label="Command">
+        <sdpi-textfield setting="command" placeholder="Enter command..." default="help"></sdpi-textfield>
+    </sdpi-item>
+
+
+    <!-- Advanced Settings -->
+    <details>
+        <summary>Advanced Settings</summary>
+        
+        <sdpi-item label="Wrapper URL">
+            <sdpi-textfield setting="wrapperUrl" placeholder="http://localhost:8080" default="http://localhost:8080"></sdpi-textfield>
+        </sdpi-item>
+
+        <sdpi-item label="Show State on Button">
+            <sdpi-checkbox setting="showState" default="true"></sdpi-checkbox>
+        </sdpi-item>
+    </details>
+
+</body>
+</html>

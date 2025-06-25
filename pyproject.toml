@@ -1,0 +1,17 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "claudeck"
+version = "0.1.0"
+description = "Stream Deck integration for Claude Code"
+authors = [{name = "Claude Deck Team"}]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+claudeck = "wrapper.claude_deck_wrapper:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]

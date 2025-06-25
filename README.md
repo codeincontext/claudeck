@@ -1,138 +1,312 @@
-# Claude Code + Stream Deck Integration
+# 🎛️ Claudeck
 
-Control Claude Code directly from your Elgato Stream Deck using this PTY wrapper and custom plugin.
+**Stream Deck integration for Claude Code** - Control Claude directly from your Elgato Stream Deck with custom buttons and dynamic state awareness.
 
-## How It Works
+![Claude + Stream Deck](https://img.shields.io/badge/Claude-Stream%20Deck-blue?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.9+-green?style=flat-square)
+![TypeScript](https://img.shields.io/badge/TypeScript-Stream%20Deck%20SDK-blue?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
-1. **PTY Wrapper** (`claude_deck_wrapper.py`) - Creates a pseudo-terminal around Claude Code
-2. **HTTP API** - Exposes endpoints for Stream Deck to send commands and get state
-3. **Stream Deck Plugin** - Custom plugin that communicates with the wrapper
+> **🎯 Never leave your keyboard again!** Skip the terminal juggling and control Claude Code with dedicated hardware buttons.
 
-## Quick Start
+## 📋 Table of Contents
+- [Why Claudeck?](#-why-claudeck)
+- [Demo](#-demo)
+- [Features](#-features)
+- [Quick Start](#-quick-start)
+- [Architecture](#️-architecture)
+- [Usage Examples](#-usage-examples)
+- [Development](#️-development)
+- [Troubleshooting](#-troubleshooting)
+- [FAQ](#-faq)
 
-### 1. Install Dependencies
+## 🤔 Why Claudeck?
 
-```bash
-# Make sure Claude Code is installed
-npm install -g @anthropic/claude-code
+**The Problem**: Constantly switching between your IDE, terminal, and Claude Code breaks your flow. You're either:
+- Alt-tabbing between windows to send commands
+- Copying/pasting between applications  
+- Losing context while Claude is "thinking"
+- Missing important state changes in Claude's interface
 
-# Python should already be available on macOS
-# No additional Python packages needed - uses only stdlib
+**The Solution**: Dedicated hardware buttons that work regardless of what's on your screen.
+
+✅ **Control Claude without focus** - Work in any app while Claude runs in background  
+✅ **At-a-glance status** - See current model and edit mode with dynamic button icons  
+✅ **Voice + hardware combo** - Use macOS dictation with Stream Deck for hands-free commands  
+✅ **One-touch actions** - No more switching windows to press Enter or Escape  
+
+## 🎬 Demo
+
+```
+🎥 [Coming Soon: GIF showing Stream Deck buttons controlling Claude in real-time]
 ```
 
-### 2. Start the Wrapper
+**Typical Workflow:**
+1. Keep working in any app (browser, editor, Slack, etc.)
+2. Press **Command** button → Send "git status" (Claude runs in background)
+3. Press **OK** button → Accept suggestion (without switching windows)
+4. **Shift+Tab** button automatically shows available mode
+5. Press **Shift+Tab** → Toggle mode quickly
+6. Continue your work while Claude runs - buttons show live status
 
-```bash
-cd /Users/adz/Documents/code/claude-deck
-python3 claude_deck_wrapper.py
-```
+## ✨ Features
 
-This will:
-- Start Claude Code in a PTY
-- Launch HTTP API on localhost:8080
-- Allow normal keyboard interaction with Claude
+### 🔘 Stream Deck Actions
+- **OK Button**: Send Return/Enter key (✓ checkmark icon)
+- **Escape Button**: Send Escape key (✗ cross icon) 
+- **Shift+Tab Button**: Context-aware alternative actions with dynamic icons
+- **Command Button**: Send custom freetext commands
 
-### 3. Test the API
+### 🎯 Dynamic State Awareness
+The Shift+Tab button automatically adapts based on Claude Code's mode:
+- **Plan Mode**: Shows plan icon with "Plan" label
+- **Auto-Accept Mode**: Shows auto-accept icon with "Auto" label  
+- **Normal Mode**: Shows default icon with "Normal" label
+- **Offline**: Grayed out with "Offline" label
 
-In another terminal:
+### 🔧 Smart Input Handling
+- Properly handles Claude Code's inquirer.js-based input system
+- Sends correct key sequences for macOS terminal interaction
+- Separate command and carriage return handling for reliable execution
+- Connection checking prevents actions when Claude Code is offline
 
-```bash
-python3 test_wrapper.py
-```
+## 🚀 Quick Start
 
-This will test the HTTP endpoints and send a sample command.
+### Prerequisites
+- Elgato Stream Deck software
+- Claude Code installed and available in PATH
+- Python 3.9+ with uv package manager
+- Node.js and npm (for plugin development)
 
-### 4. Install Stream Deck Plugin
+### Installation
 
-1. Copy the plugin folder to Stream Deck plugins directory:
+1. **Install the Python Wrapper**
    ```bash
-   cp -r streamdeck-plugin/com.claude.deck.sdPlugin ~/Library/ApplicationSupport/com.elgato.StreamDeck/Plugins/
+   git clone https://github.com/yourusername/claudeck.git
+   cd claudeck
+   
+   # Install globally with uv (development mode for easy updates)
+   uv tool install --editable .
+   ```
+   This makes the `claudeck` command available globally in your PATH.
+
+2. **Install the Stream Deck Plugin**
+   ```bash
+   # Install Stream Deck CLI tools
+   npm install -g @elgato/cli
+   
+   # Build and link the plugin for development
+   cd claudeck-plugin/context
+   npm install
+   npm run build
+   streamdeck link .
+   ```
+   This links the plugin to Stream Deck for development - changes take effect after rebuilding.
+
+### Usage
+
+1. **Start the wrapper** in any project directory:
+   ```bash
+   claudeck
    ```
 
-2. Restart Stream Deck software
+2. **Add actions** to your Stream Deck from the Actions panel
 
-3. Drag "Claude Command" action to a button
+3. **Configure commands** in the Property Inspector for the Command action
 
-4. Configure the command in the property inspector
+## 🏗️ Architecture
 
-## API Endpoints
+```mermaid
+graph LR
+    A[Stream Deck] --> B[TypeScript Plugin]
+    B --> C[HTTP API :18080]
+    C --> D[Python PTY Wrapper]
+    D --> E[Claude Code]
+    
+    E --> F[Terminal Output]
+    F --> G[State Detection]
+    G --> H[Dynamic Button Updates]
+    H --> A
+```
 
-### GET /state
-Returns current Claude Code state:
+### Communication Flow
+1. **Stream Deck Plugin** sends HTTP requests to localhost:18080
+2. **Python Wrapper** receives commands and forwards to Claude Code via PTY
+3. **Claude Code** runs in pseudo-terminal with proper TTY handling
+4. **State Monitoring** tracks Claude's mode for dynamic button updates
+
+## 📁 Project Structure
+
+```
+claudeck/
+├── wrapper/              # Python PTY wrapper
+│   ├── claude_deck_wrapper.py
+│   └── __init__.py
+├── claudeck-plugin/      # Stream Deck plugin (TypeScript)
+│   └── context/
+│       ├── src/          # TypeScript source
+│       └── de.co.context.claudedeck.sdPlugin/
+├── tests/                # Test scripts
+├── prompts/              # Prompt files and documentation
+└── pyproject.toml        # Python package configuration
+```
+
+## 🎮 Stream Deck Actions
+
+### Command Examples
+Popular commands to configure:
+- `git status` - Check git status
+- `npm test` - Run tests
+- `help` - Show Claude Code help
+
+### API Endpoints
+
+**GET `/state`** - Returns current Claude Code state:
 ```json
 {
-  "mode": "interactive",
+  "mode": "interactive", 
   "prompt": "> ",
   "options": []
 }
 ```
 
-### POST /command
-Send command to Claude:
+**POST `/command`** - Send command to Claude:
 ```bash
-curl -X POST http://localhost:8080/command \\
-  -H "Content-Type: application/json" \\
+curl -X POST http://localhost:18080/command \
+  -H "Content-Type: application/json" \
   -d '{"command": "help"}'
 ```
 
-## Predefined Commands
+## 💡 Usage Examples
 
-The Stream Deck plugin includes these common commands:
-
-- `help` - Show Claude help
-- `/plan` - Enter planning mode  
-- `/auto` - Toggle auto-accept mode
-- `/reset` - Reset conversation
-- `/exit` - Exit Claude
-- `y` - Yes response
-- `n` - No response
-- `q` - Quit/Cancel
-
-## Architecture
-
+### Scenario 1: Code Review Workflow
 ```
-Stream Deck → Plugin (JS) → HTTP API → PTY Wrapper → Claude Code
-                ↑                         ↓
-              Button Press              Terminal I/O
+💻 You're browsing documentation in Chrome
+1. [Command: "git status"] → Claude checks changes (background)
+2. [Command: "review these changes"] → Start Claude review (still browsing)
+3. [OK] → Accept Claude's suggestions (no window switching)
+4. [Shift+Tab] → Enable auto-accept for similar fixes
+💡 Never left your browser!
 ```
 
-## Troubleshooting
+### Scenario 2: Quick Testing
+```
+1. [Command: "npm test"] → Execute test suite (background)
+2. [OK] → Accept changes if tests pass
+3. [Escape] → Cancel if tests hang
+```
 
-### Wrapper won't start
-- Ensure `claude` command is in PATH
-- Check if port 8080 is available
+### Scenario 3: Voice Commands (macOS)
+```
+📱 You're reviewing a design in Figma
+1. Press fn+fn (dictation) + [Command button] → "analyze the API response structure"
+2. Claude processes in background while you continue designing
+3. [OK] → Accept Claude's analysis (still in Figma)
+💡 Completely hands-free Claude control!
+```
 
-### Stream Deck plugin not working  
-- Verify wrapper is running on localhost:8080
-- Check Stream Deck console for errors
-- Restart Stream Deck software
 
-### Commands not working
-- Test API directly with `test_wrapper.py`
-- Check wrapper console output
-- Verify Claude Code is responding
 
-## Development
+## 🛠️ Development
 
-### Testing Without Stream Deck
-
+### Plugin Development
 ```bash
-# Send commands via curl
-curl -X POST http://localhost:8080/command -H "Content-Type: application/json" -d '{"command": "help"}'
+cd claudeck-plugin/context
 
-# Check state
-curl http://localhost:8080/state
+# Install dependencies
+npm install
+
+# Build plugin  
+npm run build
+
+# Restart plugin during development
+streamdeck restart de.co.context.claudedeck
 ```
 
-### Extending Commands
+### Testing
+```bash
+# Test the wrapper API
+python tests/test_wrapper.py
 
-Add new commands in the property inspector (`propertyinspector.html`) preset list, or create custom commands by typing directly into the command field.
+# Test HTTP server functionality
+python tests/test_http_server.py
+```
 
-### State Detection
+### Adding New Actions
+1. Create new action class in `src/actions/`
+2. Add action to `manifest.json` with UUID and icons
+3. Register action in `src/plugin.ts`
+4. Build and restart plugin
 
-The wrapper parses Claude's terminal output to detect:
-- Current mode (planning, auto-accept, interactive)
-- Available options
-- Current prompt
+## 🔧 Troubleshooting
 
-Extend `ClaudeState.parse_output()` to detect additional patterns.
+### Common Issues
+
+**Buttons show "Offline"**
+- Check if `claudeck` wrapper is running
+- Verify Claude Code is installed: `which claude`
+
+**Commands not executing**
+- Restart the Python wrapper
+- Check if port 18080 is available
+
+**Plugin not loading**
+- Check Stream Deck logs in plugin folder
+- Restart Stream Deck software: `streamdeck restart de.co.context.claudedeck`
+
+### Debug Commands
+```bash
+# Restart wrapper
+pkill -f claude_deck_wrapper
+claudeck
+
+# Check wrapper status
+curl http://localhost:18080/state
+
+# Send test command
+curl -X POST http://localhost:18080/command -d '{"command":"help"}' -H "Content-Type: application/json"
+```
+
+## ❓ FAQ
+
+**Q: Does this work with other AI coding assistants?**  
+A: Currently designed specifically for Claude Code's interface patterns. Could be adapted for others.
+
+**Q: What if I don't have a Stream Deck?**  
+A: The HTTP API works with any tool that can send HTTP requests. You could build integrations for other macro keyboards or even mobile apps.
+
+**Q: Can I use this on Windows/Linux?**  
+A: The Python wrapper should work cross-platform, but the Stream Deck plugin is currently macOS-focused (key sequences may need adjustment).
+
+**Q: Can I add my own custom commands?**  
+A: Yes! Use the Command action and configure any text you want to send to Claude. Pro tip: Combine with macOS dictation (fn+fn) for voice commands.
+
+**Q: How does the dictation integration work?**  
+A: Configure a Command button, then use macOS dictation (fn+fn) to speak your command. The Stream Deck sends whatever you dictate directly to Claude - no typing required!
+
+## 🎯 Configuration
+
+### Wrapper Options
+```bash
+claudeck --help
+claudeck --port 8080 --quiet
+```
+
+### Property Inspector
+Configure Command actions through Stream Deck's Property Inspector:
+- **Command**: Set custom command text
+- **Wrapper URL**: Change API endpoint (default: http://localhost:8080)
+- **Show State**: Enable/disable state polling
+
+## 🤝 Contributing
+
+Contributions welcome! Please read our contributing guidelines and submit pull requests.
+
+## 🙏 Credits
+
+- Built for Elgato Stream Deck
+- Integrates with Anthropic's Claude Code
+
+---
+
+⭐ **Star this repo** if you find it useful!

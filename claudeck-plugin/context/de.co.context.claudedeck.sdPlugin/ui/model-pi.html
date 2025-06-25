@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Claude Model Settings</title>
+    <meta charset="utf-8" />
+    <script src="https://sdpi-components.dev/releases/v4/sdpi-components.js"></script>
+</head>
+<body>
+    <sdpi-item label="Info">
+        <span style="color: #999; font-size: 12px;">
+            Press button to toggle between Default and Opus models.<br>
+            Current model will be displayed on the button.
+        </span>
+    </sdpi-item>
+
+    <!-- Advanced Settings -->
+    <details>
+        <summary>Advanced Settings</summary>
+        
+        <sdpi-item label="Wrapper URL">
+            <sdpi-textfield setting="wrapperUrl" placeholder="http://localhost:8080" default="http://localhost:8080"></sdpi-textfield>
+        </sdpi-item>
+    </details>
+
+</body>
+</html>
