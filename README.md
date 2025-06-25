@@ -56,7 +56,7 @@
 ### 🔘 Stream Deck Actions
 - **OK Button**: Send Return/Enter key (✓ checkmark icon)
 - **Escape Button**: Send Escape key (✗ cross icon) 
-- **Shift+Tab Button**: Context-aware alternative actions with dynamic icons
+- **Mode Button**: Switches between plan, auto-accept, and normal modes
 - **Command Button**: Send custom freetext commands
 
 ### 🎯 Dynamic State Awareness
