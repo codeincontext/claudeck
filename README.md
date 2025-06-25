@@ -82,7 +82,7 @@ The Shift+Tab button automatically adapts based on Claude Code's mode:
 
 1. **Install the Python Wrapper**
    ```bash
-   git clone https://github.com/yourusername/claudeck.git
+   git clone https://github.com/codeincontext/claudeck.git
    cd claudeck
    
    # Install globally with uv (development mode for easy updates)
