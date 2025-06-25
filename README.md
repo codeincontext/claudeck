@@ -57,20 +57,10 @@
 - **OK Button**: Send Return/Enter key (✓ checkmark icon)
 - **Escape Button**: Send Escape key (✗ cross icon) 
 - **Mode Button**: Switches between plan, auto-accept, and normal modes
+- **Model Button**: Toggles between Opus and Sonnet models
 - **Command Button**: Send custom freetext commands
 
-### 🎯 Dynamic State Awareness
-The Shift+Tab button automatically adapts based on Claude Code's mode:
-- **Plan Mode**: Shows plan icon with "Plan" label
-- **Auto-Accept Mode**: Shows auto-accept icon with "Auto" label  
-- **Normal Mode**: Shows default icon with "Normal" label
-- **Offline**: Grayed out with "Offline" label
 
-### 🔧 Smart Input Handling
-- Properly handles Claude Code's inquirer.js-based input system
-- Sends correct key sequences for macOS terminal interaction
-- Separate command and carriage return handling for reliable execution
-- Connection checking prevents actions when Claude Code is offline
 
 ## 🚀 Quick Start
 
