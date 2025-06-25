@@ -1,6 +1,8 @@
 # 🎛️ Claudeck
 
-**Stream Deck integration for Claude Code** - Control Claude directly from your Elgato Stream Deck with custom buttons and dynamic state awareness.
+**Physical buttons for Claude Code. Bypass the keyboard - buttons wired straight to the terminal.**
+
+![Claudeck in Action](hero-image.jpg)
 
 ![Claude + Stream Deck](https://img.shields.io/badge/Claude-Stream%20Deck-blue?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.9+-green?style=flat-square)
