@@ -26,8 +26,8 @@
 
 **The Problem**: Constantly switching between your IDE, terminal, and Claude Code breaks your flow. You're either:
 - Alt-tabbing between windows to send commands
-- Copying/pasting between applications  
-- Losing context while Claude is "thinking"
+- Only have one arm free (holding a baby, playing guitar)
+- Working hands-free with voice coding
 - Missing important state changes in Claude's interface
 
 **The Solution**: Dedicated hardware buttons that work regardless of what's on your screen.
