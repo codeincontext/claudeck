@@ -32,14 +32,14 @@
 
 **The Solution**: Dedicated hardware buttons that work regardless of what's on your screen.
 
-### Typical Workflow:
+### Typical Workflow with Claudeck:
 1. Ask Claude to do something (typing or voice)
 2. Switch to other work while Claude thinks
-3. Claude asks permission to proceed 
-4. Alt-tab back to approve, then back to your work
-5. Repeat endlessly
+3. Claude asks permission - Stream Deck button lights up
+4. Press OK button without leaving your current app
+5. Continue working seamlessly
 
-Even worse when coding with voice - you're hands-free until Claude needs approval.
+Voice coding stays hands-free - just press buttons when Claude needs approval.
 
 ✅ **Control Claude without focus** - Work in any app while Claude runs in background  
 ✅ **At-a-glance status** - See current model and edit mode with dynamic button icons  
