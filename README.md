@@ -1,6 +1,6 @@
 # 🎛️ Claudeck
 
-**Physical buttons for Claude Code. Control Claude instantly from your Stream Deck - no keyboard, no switching windows, just press and go.**
+**Physical buttons for Claude Code. Control Claude instantly from your Stream Deck - no keyboard, no switching windows. See Claude's state at a glance.**
 
 ![Claudeck in Action](hero-image.jpg)
 
